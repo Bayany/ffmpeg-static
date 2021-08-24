@@ -122,22 +122,20 @@ download \
 
 # libass dependency
 download \
-  "harfbuzz-1.4.6.tar.bz2" \
+  "harfbuzz-2.9.0.tar.xz" \
   "" \
-  "e246c08a3bac98e31e731b2a1bf97edf" \
-  "https://www.freedesktop.org/software/harfbuzz/release/"
-
-download \
-  "fribidi-1.0.2.tar.bz2" \
-  "" \
-  "bd2eb2f3a01ba11a541153f505005a7b" \
-  "https://github.com/fribidi/fribidi/releases/download/v1.0.2/"
-
-download \
-  "0.13.6.tar.gz" \
-  "libass-0.13.6.tar.gz" \
   "nil" \
-  "https://github.com/libass/libass/archive/"
+  "https://github.com/harfbuzz/harfbuzz/releases/download/2.9.0"
+
+download \
+  "fribidi-1.0.10.tar.xz" \
+  "" \
+  "nil" \
+  "https://github.com/fribidi/fribidi/releases/download/v1.0.10" 
+
+git clone https://github.com/libass/libass.git 
+git config --global alias.pr '!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f'
+cd libass && git pr 441 && cd ..
 
 download \
   "lame-3.99.5.tar.gz" \
@@ -300,7 +298,7 @@ make -j $jval
 make install
 
 echo "*** Building libass ***"
-cd $BUILD_DIR/libass-*
+cd $BUILD_DIR/libass
 [ $rebuild -eq 1 -a -f Makefile ] && make distclean || true
 ./autogen.sh
 ./configure --prefix=$TARGET_DIR --disable-shared
