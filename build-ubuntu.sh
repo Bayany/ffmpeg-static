@@ -8,7 +8,6 @@ sudo apt-get -y --force-yes install \
   cmake \
   frei0r-plugins-dev \
   gawk \
-  libass-dev \
   libfreetype6-dev \
   libopencore-amrnb-dev \
   libopencore-amrwb-dev \
